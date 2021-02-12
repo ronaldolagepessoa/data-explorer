@@ -5,21 +5,21 @@ import plotly.express as px
 st.set_page_config(layout='wide', page_title='DataScience')
 px.set_mapbox_access_token('pk.eyJ1Ijoicm9uYWxkb2xhZ2UiLCJhIjoiY2tldm5yMnl1MGNxcTJ6bm9qcnR6eDl0ZSJ9.SHArbKTHFkYTNFaVro_gAw')
 
+df1 = pd.read_csv('dados/airbnb_ny2.csv')
+df3 = pd.read_csv('dados/airbnb_ny.csv')
+df2 = pd.read_csv('dados/alugueis_brasil.csv')
+
+exemplos = {'AirBnb Nova Iorque': df1, 
+                'AirBnb Nova Iorque (raw)': df3,
+                'Alugueis em São Paulo': df2}
+
 @st.cache
 def get_data(exemplos, option):
     return exemplos[option]
 
 
 def main():
-    
 
-    df1 = pd.read_csv('dados/airbnb_ny2.csv')
-    df2 = pd.read_csv('dados/alugueis_brasil.csv')
-
-    exemplos = {'AirBnb Nova Iorque': df1, 
-                'Alugueis em São Paulo': df2}
-
-    
     st.title('Ferramentas Estatísticas Aplicadas')
     st.header('Análise exploratória de dados')
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
@@ -28,13 +28,14 @@ def main():
 
     st.subheader('Dados:')
     df = get_data(exemplos, option)
-    st.dataframe(df)
+    st.dataframe(df.head())
+    st.write(f'Número de linhas = {df.shape[0]}')
 
     with st.beta_expander('Estatísticas agrupadas'):
         todas_colunas = list(df.columns)
         groupy_list = st.multiselect('Escolha as colunas de agrupamento', todas_colunas)
-        colunas_restantes = [value for value in todas_colunas if value not in groupy_list]
-        target_list = st.multiselect('Escolha as colunas da estatística', colunas_restantes)
+        # colunas_restantes = [value for value in todas_colunas if value not in groupy_list]
+        target_list = st.multiselect('Escolha as colunas da estatística', todas_colunas)
         lista_estatisticas = ['média', 
                         'desvio padrão', 
                         'mediana', 
