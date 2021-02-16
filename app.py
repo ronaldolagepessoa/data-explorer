@@ -74,11 +74,11 @@ def main():
             freqs = {}
             for column in df_temp.select_dtypes(include='object').columns:
                 st.write(column)
-                freqs[column, 'mínimo'] = st.slider(f"Frequência mínima", 
+                freqs[column, 'mínimo'] = st.number_input(f"Frequência mínima", 
                                                     min_value=df_temp[column].value_counts().min(), 
                                                     max_value=df_temp[column].value_counts().max(),
                                                     value=df_temp[column].value_counts().min(), key=column)
-                freqs[column, 'máximo'] = st.slider(f"Frequência máxima", 
+                freqs[column, 'máximo'] = st.number_input(f"Frequência máxima", 
                                                     min_value=df_temp[column].value_counts().min(), 
                                                     max_value=df_temp[column].value_counts().max(),
                                                     value=df_temp[column].value_counts().max(), key=column)
