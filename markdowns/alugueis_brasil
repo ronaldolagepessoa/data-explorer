@@ -1,0 +1,23 @@
+### Dados de imóveis para alugar em São Paulo - Brasil
+#### Descrição das colunas
+* __cidade__: 0 = capital e 1 = interior
+* __area__: área do imóvel em metros quadrados
+* __quartos__: número de quartos
+* __banheiros__: número de banheiros
+* __vagas__: número de vagas
+* __andar__: andar do imóvel (observação: 0 = casa)
+* __animal__: se aceita ou não animals
+* __mobiliado__: se é ou não mobiliado
+* __condominio__: valor do condomínio mensal em R$
+* __aluguel__: valor do aluguel mensal em R$
+* __iptu__: valor do iptu mensal em R$
+* __seguro_incendio__: valor do seguro incêndio mensal em R$
+* __valor_total__: condominio + aluguel + iptu + seguro_incendio
+#### Questionamentos para se investigar:
+1. Existe diferença nos preços do aluguel em relação à permissão da entrada de animais?
+2. Os andares influenciam o valor_total?
+3. O fato de ser mobiliado altera o valor do condomínio?
+4. Os fatores "andar" e "mobiliado", em conjunto, afetam o valor total?
+5. Existe uma diferença substancial na área entre os imóveis na capital e interior?
+6. Existe relação entre a área e o valor do aluguel?
+7. existe relação entre o valor do seguro incendio e a área?

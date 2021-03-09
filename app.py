@@ -9,16 +9,18 @@ st.set_page_config(layout='wide', page_title='DataScience')
 px.set_mapbox_access_token('pk.eyJ1Ijoicm9uYWxkb2xhZ2UiLCJhIjoiY2tldm5yMnl1MGNxcTJ6bm9qcnR6eDl0ZSJ9.SHArbKTHFkYTNFaVro_gAw')
 
 # df1 = pd.read_csv('dados/airbnb_ny2.csv')
-df3 = pd.read_csv('dados/airbnb_ny.csv')
-df2 = pd.read_csv('dados/alugueis_brasil.csv')
+# df3 = pd.read_csv('dados/airbnb_ny.csv')
+# df2 = pd.read_csv('dados/alugueis_brasil.csv')
 
-exemplos = { 
-                'AirBnb Nova Iorque': df3,
-                'Alugueis em São Paulo': df2}
+
 
 @st.cache
 def get_data(exemplos, option):
     return exemplos[option]
+
+@st.cache
+def fecth_data(table_name):
+    return pd.read_csv(f'dados/{table_name}.csv')
 
 def img_to_bytes(img_path):
     img_bytes = Path(img_path).read_bytes()
@@ -58,41 +60,27 @@ def main():
                         ##### Contato
                         * ronaldo.lage.pessoa@gmail.com
                         """)
-    
+    exemplos = { 
+                'AirBnb Nova Iorque': {'data': 'airbnb_ny2'},
+                'Alugueis em São Paulo': {'data': 'alugueis_brasil'},
+                'Alugueis no Brasil': {'data': 'alugueis_brasil2'}}
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
-        df_temp = get_data(exemplos, option)
+        df_temp = fecth_data(exemplos[option]['data'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
     with st.beta_expander('Descrição'):
-        if option == 'Alugueis em São Paulo':
-            st.markdown("""
-                        ### Dados de imóveis para alugar em São Paulo - Brasil
-                        #### Descrição das colunas
-                        * __cidade__: 0 = capital e 1 = interior
-                        * __area__: área do imóvel em metros quadrados
-                        * __quartos__: número de quartos
-                        * __banheiros__: número de banheiros
-                        * __vagas__: número de vagas
-                        * __andar__: andar do imóvel (observação: 0 = casa)
-                        * __animal__: se aceita ou não animals
-                        * __mobiliado__: se é ou não mobiliado
-                        * __condominio__: valor do condomínio mensal em R$
-                        * __aluguel__: valor do aluguel mensal em R$
-                        * __iptu__: valor do iptu mensal em R$
-                        * __seguro_incendio__: valor do seguro incêndio mensal em R$
-                        * __valor_total__: condominio + aluguel + iptu + seguro_incendio
-                        #### Questionamentos para se investigar:
-                        1. Existe diferença nos preços do aluguel em relação à permissão da entrada de animais?
-                        2. Os andares influenciam o valor_total?
-                        3. O fato de ser mobiliado altera o valor do condomínio?
-                        4. Os fatores "andar" e "mobiliado", em conjunto, afetam o valor total?
-                        5. Existe uma diferença substancial na área entre os imóveis na capital e interior?
-                        
-                        
-                        
-                        """)
+        if option == 'AirBnb Nova Iorque':
+            with open('markdowns/airbnb_ny', 'r') as file:
+                st.markdown(file.read())
+        elif option == 'Alugueis em São Paulo':
+            with open('markdowns/alugueis_brasil', 'r') as file:
+                st.markdown(file.read())
+        elif option == 'Alugueis no Brasil':
+            with open('markdowns/alugueis_brasil2', 'r') as file:
+                st.markdown(file.read())
+            
 
     with st.beta_expander('Filtros'):
         filtro = st.empty()
@@ -114,6 +102,7 @@ def main():
         with cols[1]:
             st.subheader('Colunas Numéricas')
             values = {}
+            print(df_temp.columns)
             for column in df_temp.select_dtypes(exclude='object').columns:
                 st.write(column)
                 values[column, 'mínimo'] = st.number_input(f"Valor mínimo", value=df_temp[column].min(), key=column)
@@ -205,7 +194,7 @@ def main():
             st.dataframe(df_e.reset_index())
             
     with st.beta_expander('Gráficos interativos'):
-        lista_graficos = ['dispersão', 'linha', 'area', 'histograma', 'box', 'violino', 'densidade', 'categoria paralela',
+        lista_graficos = ['dispersão','densidade', 'linha', 'area', 'histograma', 'box', 'violino', 'categoria paralela',
                         'dispersão geográfica', 'densidade geográfica']
         st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
         tipo_grafico = st.radio('Tipo de gráfico', lista_graficos)

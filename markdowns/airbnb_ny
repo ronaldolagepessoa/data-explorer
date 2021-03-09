@@ -1,0 +1,24 @@
+### Dados de imóveis para alugar no AirBnb de Nova Iorque
+#### Descrição das colunas
+* __nome__: nome do imóvel no aplicativo
+* __distrito__: distrito no qual o imóvel se encontra
+* __bairro__: bairro no qual o imóvel se encontra
+* __latitude__: latitude da coordenada geográfica
+* __longitude__: longitude da coordenada geográfica
+* __tipo_quarto__: tipo de acomodação
+* __preco__: preço por noite
+* __numero_reviews__: número de comentários deixados por pessoas que já alugaram o imóvel
+* __minimo_noites__: número mínimo de noites para alugar
+* __disponibilidade_anual__: número de dias que o imóvel fica disponível para aluguel durante o ano
+#### Questionamentos para se investigar:
+
+1. Os imóveis com preço muito alto (_outliers_) costumam estar próximos?
+2. Existe relação entre o número de reviews e o preço por noite?
+3. O tipo de acomodação influencia o preco?
+4. Qual tipo de acomodação possui mais _outliers_?
+5. Qual é o bairro com maior número de imóveis para alugar?
+6. Qual é o bairro com maior número de quartos privados para alugar?
+7. Qual é o bairro mais caro?
+8. Qual bairro possui apartamentos inteiros mais caros?
+9. Qual bairro possui quartos compartilhados mais caros?
+10. Existe diferença no número mínimo de noites por tipo de acomodação?
