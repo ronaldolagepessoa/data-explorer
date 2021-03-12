@@ -19,8 +19,8 @@ def get_data(exemplos, option):
     return exemplos[option]
 
 @st.cache
-def fecth_data(table_name):
-    return pd.read_csv(f'dados/{table_name}.csv')
+def fecth_data(table_name, sep=','):
+    return pd.read_csv(f'dados/{table_name}.csv', sep=sep)
 
 def img_to_bytes(img_path):
     img_bytes = Path(img_path).read_bytes()
@@ -61,13 +61,14 @@ def main():
                         * ronaldo.lage.pessoa@gmail.com
                         """)
     exemplos = { 
-                'AirBnb Nova Iorque': {'data': 'airbnb_ny2'},
-                'Alugueis em São Paulo': {'data': 'alugueis_brasil'},
-                'Alugueis no Brasil': {'data': 'alugueis_brasil2'}}
+                'AirBnb Nova Iorque': {'data': 'airbnb_ny2', 'sep': ','},
+                'Alugueis em São Paulo': {'data': 'alugueis_brasil', 'sep': ','},
+                'Alugueis no Brasil': {'data': 'alugueis_brasil2', 'sep': ','},
+                'Banco': {'data': 'bank-additional-full', 'sep': ';'}}
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
-        df_temp = fecth_data(exemplos[option]['data'])
+        df_temp = fecth_data(exemplos[option]['data'], sep=exemplos[option]['sep'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
     with st.beta_expander('Descrição'):
@@ -79,6 +80,9 @@ def main():
                 st.markdown(file.read())
         elif option == 'Alugueis no Brasil':
             with open('markdowns/alugueis_brasil2', 'r') as file:
+                st.markdown(file.read())
+        elif option == 'Banco':
+            with open('markdowns/banco', 'r') as file:
                 st.markdown(file.read())
             
 
@@ -102,7 +106,6 @@ def main():
         with cols[1]:
             st.subheader('Colunas Numéricas')
             values = {}
-            print(df_temp.columns)
             for column in df_temp.select_dtypes(exclude='object').columns:
                 st.write(column)
                 values[column, 'mínimo'] = st.number_input(f"Valor mínimo", value=df_temp[column].min(), key=column)

@@ -1,0 +1,30 @@
+### Dados de clientes de um banco
+#### Descrição das colunas
+
+* __Age__: idade (numérico)
+* __Job__ : tipo de trabalho (categórico: 'admin.', 'blue-collar', 'entrepreneur', 'housemaid', 'management', 'retired', 'self-employed', 'services', 'student', 'technician', 'unemployed', 'unknown')
+* __Marital__ : estado civil (categórico: 'divorced', 'married', 'single', 'unknown' ; note: 'divorced' means divorced or widowed)
+* __Education__: nível de educação (categórico: 'basic.4y', 'basic.6y', 'basic.9y', 'high.school', 'illiterate', 'professional.course', 'university.degree', 'unknown')
+* __Default__: possui crédito? (categórico: 'no', 'yes', 'unknown')
+* __Housing__: tem empréstimo imobiliário? (categórico: 'no', 'yes', 'unknown')
+* __Loan__: tem empréstimo pessoa física? (categórico: 'no', 'yes', 'unknown')
+* __Contact__: forma de contato (categórico:
+'cellular','telephone')
+* __Month__: último mês de contato no ano (categórico: 'jan', 'feb', 'mar',
+…, 'nov', 'dec')
+* __Dayofweek__: último dia de contato da semana (categórico:
+'mon','tue','wed','thu','fri')
+* __Duration__: duração do último contato em segundos (numeric). 
+* __Campaign__: número de contatos feitos durante a camanha de marketing (numeric, includes last contact)
+* __Pdays__: número de dias desde o último contato da última campanha (numeric; 999 means client was not
+previously contacted)
+* __Previous__: número de contatos antes da campanha (numeric)
+* __Poutcome__: resultado da útima campanha (categorical:
+'failure','nonexistent','success')
+* __Emp.var.rate__: taxa de variação de emprego
+(numeric)
+* __Cons.price.idx__: índice de preço do consumidor (numeric)
+* __Cons.conf.idx__: índice de confiança do consumidor (numeric)
+* __Euribor3m__: taxa euribor de 3 meses (numeric)
+* __Nr.employed__: número de funcionários (numeric)
+* __y__: o cliente assinou um depósito a prazo? (binary: 'yes', 'no')
