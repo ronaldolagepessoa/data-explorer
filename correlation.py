@@ -21,7 +21,7 @@ def correlation():
                 'Alugueis em São Paulo': {'data': 'alugueis_brasil', 'sep': ','},
                 'Alugueis no Brasil': {'data': 'alugueis_brasil2', 'sep': ','},
                 'Cancer de mama': {'data': 'Breast_cancer_data', 'sep': ','},
-                # 'Dados demográficos': {'data': 'Country-data', 'sep': ','},
+                'Dados demográficos': {'data': 'Country-data', 'sep': ','},
                 'Banco da alemanha': {'data': 'german_credit_data', 'sep': ','}}
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):

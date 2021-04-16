@@ -57,14 +57,5 @@ def main():
     
 
 if __name__ == '__main__':
-    user = st.sidebar.text_input('Usuário')
-    password = st.sidebar.text_input('Senha de acesso', type='password')
-    
-    if st.sidebar.button('Entrar'):
-        if user == 'alunos' and password == 'unifor':
-            main()
-        else:
-            st.warning('Usuário ou Senha Incorretos!!!')
-    elif user == 'alunos' and password == 'unifor':
-        main()       
+    main()       
 
