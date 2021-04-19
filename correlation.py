@@ -22,7 +22,9 @@ def correlation():
                 'Alugueis no Brasil': {'data': 'alugueis_brasil2', 'sep': ','},
                 'Cancer de mama': {'data': 'Breast_cancer_data', 'sep': ','},
                 'Dados demográficos': {'data': 'Country-data', 'sep': ','},
-                'Banco da alemanha': {'data': 'german_credit_data', 'sep': ','}}
+                'Banco da alemanha': {'data': 'german_credit_data', 'sep': ','},
+                'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
+                }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
@@ -30,7 +32,12 @@ def correlation():
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
     with st.beta_expander('Descrição'):
-        pass
+        if option == 'Carros':
+            with open('markdowns/carros', 'r') as file:
+                st.markdown(file.read())
+    # if option == 'AirBnb Nova Iorque':
+        #     with open('markdowns/airbnb_ny', 'r') as file:
+        #         st.markdown(file.read())
         # if option == 'AirBnb Nova Iorque':
         #     with open('markdowns/airbnb_ny', 'r') as file:
         #         st.markdown(file.read())

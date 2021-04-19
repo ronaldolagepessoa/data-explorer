@@ -1,0 +1,25 @@
+#### Descrição das colunas
+
+* __CarName__: nome do modelo
+* __fueltype__ : tipo de combustível
+* __aspiration__ : tipo de motor (aspirado ou turbo)
+* __doornumber__: número de portas
+* __carbody__: categoria do carro (exemplo: sedan, hatchback)
+* __drivewheel__: tipo de tração
+* __enginelocation__: posição do motor
+* __wheelbase__: distância entre eixos
+* __carlength__: comprimento do carro
+* __carwidth__: largura do carro
+* __carheight__: altura do carro
+* __curbweight__: peso do carro
+* __enginetype__: tipo de motor
+* __cylindernumber__: número de cilindros
+* __enginesize__: tamanho do motor
+* __fuelsystem__: sistema de injeção
+* __boreratio__: relação entre o diâmetro do furo do cilindro e o comprimento do curso do pistão
+* __stroke__: índice de preço do consumidor (numeric)
+* __compressionratio__: razão de compressão
+* __horsepower__: potência
+* __citympg__: consumo média na cidade
+* __highwaympg__: consumo médio na estrada
+* __price__: preço de venda

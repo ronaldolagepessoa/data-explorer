@@ -20,7 +20,9 @@ def explorer():
                 'AirBnb Nova Iorque': {'data': 'airbnb_ny2', 'sep': ','},
                 'Alugueis em São Paulo': {'data': 'alugueis_brasil', 'sep': ','},
                 'Alugueis no Brasil': {'data': 'alugueis_brasil2', 'sep': ','},
-                'Banco': {'data': 'bank-additional-full', 'sep': ';'}}
+                'Banco': {'data': 'bank-additional-full', 'sep': ';'},
+                'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
+                }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)

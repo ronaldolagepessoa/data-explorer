@@ -4,6 +4,7 @@ from pathlib import Path
 import base64
 from explorer import explorer
 from correlation import correlation
+from regression import regression
 
 
 st.set_page_config(layout='wide', page_title='DataScience')
@@ -54,6 +55,8 @@ def main():
         explorer()
     elif opcao == 'Análise de correlação':
         correlation()
+    elif opcao == 'Regressão':
+        regression()
     
 
 if __name__ == '__main__':
