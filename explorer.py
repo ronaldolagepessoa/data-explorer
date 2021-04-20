@@ -20,6 +20,7 @@ def explorer():
                 'AirBnb Nova Iorque': {'data': 'airbnb_ny2', 'sep': ','},
                 'Alugueis em São Paulo': {'data': 'alugueis_brasil', 'sep': ','},
                 'Alugueis no Brasil': {'data': 'alugueis_brasil2', 'sep': ','},
+                'Cancer de mama': {'data': 'Breast_cancer_data', 'sep': ','},
                 'Banco': {'data': 'bank-additional-full', 'sep': ';'},
                 'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
                 }
