@@ -17,7 +17,6 @@
 * __enginesize__: tamanho do motor
 * __fuelsystem__: sistema de injeção
 * __boreratio__: relação entre o diâmetro do furo do cilindro e o comprimento do curso do pistão
-* __stroke__: índice de preço do consumidor (numeric)
 * __compressionratio__: razão de compressão
 * __horsepower__: potência
 * __citympg__: consumo média na cidade

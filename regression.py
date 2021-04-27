@@ -11,8 +11,6 @@ from sklearn.metrics import mean_squared_error
 
 
 
-px.set_mapbox_access_token('pk.eyJ1Ijoicm9uYWxkb2xhZ2UiLCJhIjoiY2tldm5yMnl1MGNxcTJ6bm9qcnR6eDl0ZSJ9.SHArbKTHFkYTNFaVro_gAw')
-
 @st.cache
 def get_data(exemplos, option):
     return exemplos[option]
@@ -33,11 +31,6 @@ def pre_process_data(df, y_column, columns_to_eliminate):
     X_num = mmscaler.fit_transform(X.select_dtypes(exclude=['object']))
     X_all = np.append(X_num, X_bin, axis=1)
     return X_all, y, onehot, mmscaler
-
-def linearRegression(X, y):
-    model = LinearRegression()
-    model.fit(X, y)
-    return model
 
 def regression():
     st.header('Regressão')
