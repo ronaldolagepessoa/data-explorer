@@ -8,6 +8,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
 
 
 
@@ -26,9 +28,15 @@ def pre_process_data(df, y_column, columns_to_eliminate):
     y = df[y_column]
     X = df.drop(y_column, axis=1)
     onehot = OneHotEncoder(sparse=False, drop="first")
-    X_bin = onehot.fit_transform(X.select_dtypes(include=['object']))
+    try:
+        X_bin = onehot.fit_transform(X.select_dtypes(include=['object']))
+    except:
+        X_bin = np.array([[] for _ in range(X.shape[0])])
     mmscaler = MinMaxScaler()
-    X_num = mmscaler.fit_transform(X.select_dtypes(exclude=['object']))
+    try:
+        X_num = mmscaler.fit_transform(X.select_dtypes(exclude=['object']))
+    except:
+        X_num = np.array([[] for _ in range(X.shape[0])])
     X_all = np.append(X_num, X_bin, axis=1)
     return X_all, y, onehot, mmscaler
 
@@ -41,7 +49,7 @@ def regression():
                 'Cancer de mama': {'data': 'Breast_cancer_data', 'sep': ','},
                 'Dados demográficos': {'data': 'Country-data', 'sep': ','},
                 'Banco da alemanha': {'data': 'german_credit_data', 'sep': ','},
-                'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
+                'Carros': {'data': 'carros', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
     with st.beta_expander('Dados'):
@@ -64,6 +72,9 @@ def regression():
         #     with open('markdowns/banco', 'r') as file:
         #         st.markdown(file.read())
     with st.beta_expander('Ajustar modelo de regressão'):
+        st.markdown('### Configuração do treinamento')
+        train_size = st.slider('Proporção do conjunto de treinamento', value=0.7, min_value=0.5, max_value=0.9, step=0.05)
+        st.markdown('### Configuração do método de classificação')
         metodo = st.selectbox('Escolha o método de regressão', ('linear', 'polinomial'))
         if metodo == 'polinomial':
             grau = st.number_input('Grau do polinômio', value=2)
@@ -83,9 +94,10 @@ def regression():
                 model = LinearRegression()
             elif metodo == 'polinomial':
                 model = make_pipeline(PolynomialFeatures(grau),LinearRegression())
-            model.fit(X, y)
-            st.write('* Erro médio quadrático = ', mean_squared_error(y, model.predict(X)))
-            st.write('* Score = ', model.score(X, y))
+            X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, train_size=train_size)
+            model.fit(X_train, y_train)
+            st.write('* Erro médio quadrático = ', mean_squared_error(y_test, model.predict(X_test)))
+            st.write('* Score = ', r2_score(y_test, model.predict(X_test)))
 
     with st.beta_expander('Fazer previsão'):
         inputs = {}
