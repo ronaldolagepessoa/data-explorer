@@ -5,6 +5,7 @@ import base64
 from explorer import explorer
 from correlation import correlation
 from regression import regression
+from autoregression import autoregression
 
 
 st.set_page_config(layout='wide', page_title='DataScience')
@@ -57,6 +58,8 @@ def main():
         correlation()
     elif opcao == 'Regressão':
         regression()
+    elif opcao == 'Séries Temporais':
+        autoregression()
     
 
 if __name__ == '__main__':
