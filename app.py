@@ -22,7 +22,7 @@ def img_to_bytes(img_path):
 def main():
     st.title('Ferramentas Estatísticas Aplicadas')
     
-    with st.beta_expander('Clique para exibir informações sobre o autor da ferramenta'):
+    with st.expander('Clique para exibir informações sobre o autor da ferramenta'):
         st.markdown(r"""### Sobre o autor""")
         cols = st.beta_columns((1, 8))
         with cols[0]:

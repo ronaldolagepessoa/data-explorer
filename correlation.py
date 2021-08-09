@@ -26,12 +26,12 @@ def correlation():
                 'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
-    with st.beta_expander('Dados'):
+    with st.expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
         df_temp = fecth_data(exemplos[option]['data'], sep=exemplos[option]['sep'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
-    with st.beta_expander('Descrição'):
+    with st.expander('Descrição'):
         if option == 'Carros':
             with open('markdowns/carros', 'r') as file:
                 st.markdown(file.read())
@@ -50,20 +50,20 @@ def correlation():
         # elif option == 'Banco':
         #     with open('markdowns/banco', 'r') as file:
         #         st.markdown(file.read())
-    with st.beta_expander('Correlação'):
+    with st.expander('Correlação'):
         metodo = st.selectbox('Escolha o coeficiente de correlação', ('pearson', 'spearman', 'kendall'))
         colunas_para_eliminar = st.multiselect('Selecione as colunas para eliminar', df_temp.columns)
         if st.button('Calcular'):
             df = df_temp.drop(colunas_para_eliminar, axis=1).corr(method=metodo)
             st.dataframe(df)
-    with st.beta_expander('Correlação agrupada'):
+    with st.expander('Correlação agrupada'):
         metodo = st.selectbox('Escolha o coeficiente de correlação', ('pearson', 'spearman', 'kendall'), key='grupo')
         colunas_de_agrupamento = st.multiselect('Selecione as colunas para eliminar', df_temp.select_dtypes(include='object').columns)
         if st.button('Calcular', key='calc-grupo'):
             df = df_temp.groupby(colunas_de_agrupamento).corr(method=metodo)
             st.dataframe(df)
         # colunas_para_eliminar = st.multiselect('Selecione as colunas para eliminar', df_temp.columns)
-    with st.beta_expander('Gráficos'):
+    with st.expander('Gráficos'):
         x = st.selectbox('Escolha a variável para o eixo x', df_temp.select_dtypes(exclude='object').columns)
         y = st.selectbox('Escolha a variável para o eixo y', df_temp.select_dtypes(exclude='object').columns)
         if st.checkbox('cor'):

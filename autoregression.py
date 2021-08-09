@@ -105,18 +105,18 @@ def autoregression():
                 'Clima em Nova Deli': {'data': 'DailyDelhiClimateTrain', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
-    with st.beta_expander('Dados'):
+    with st.expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
         df_temp = fecth_data(exemplos[option]['data'], sep=exemplos[option]['sep'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
-    with st.beta_expander('Descrição'):
+    with st.expander('Descrição'):
         
         if option == 'Carros':
             with open('markdowns/carros', 'r') as file:
                 st.markdown(file.read())
                 
-    with st.beta_expander('Gráfico'):
+    with st.expander('Gráfico'):
         tempo = st.selectbox('Escolha a variável de tempo', df_temp.columns, key='tempo-g')
         output = st.selectbox('Escolha a variável de output', df_temp.select_dtypes(exclude='object').columns, key='output-g')
         if st.checkbox('Categoria por cor'):
@@ -129,7 +129,7 @@ def autoregression():
                 st.plotly_chart(px.line(df_temp.sort_values(tempo), x=tempo, y=output, color=color), use_container_width=True)
             else:
                 st.plotly_chart(px.line(df_temp.sort_values(tempo), x=tempo, y=output), use_container_width=True)
-    with st.beta_expander('Ajustar modelo autoregressivo'):
+    with st.expander('Ajustar modelo autoregressivo'):
         st.markdown('### Configuração do treinamento')
         train_size = st.slider('Proporção do conjunto de treinamento', value=0.7, min_value=0.5, max_value=0.9, step=0.05)
         st.markdown('### Configuração do método de autoregressão')
@@ -209,7 +209,7 @@ def autoregression():
                     result = result[[output, 'Previsão']].stack().reset_index(name='Valor').rename(columns={'level_1': 'Tipo'})
                     st.plotly_chart(px.line(result, x=tempo, y='Valor', color='Tipo'), use_container_width=True)
 
-    with st.beta_expander('Fazer previsão'):
+    with st.expander('Fazer previsão'):
         
         if exogeno:
             inputs = {}

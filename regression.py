@@ -99,12 +99,12 @@ def regression():
                 'Audis': {'data': 'audi', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
-    with st.beta_expander('Dados'):
+    with st.expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
         df_temp = fecth_data(exemplos[option]['data'], sep=exemplos[option]['sep'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
-    with st.beta_expander('Descrição'):
+    with st.expander('Descrição'):
         
         if option == 'Carros':
             with open('markdowns/carros', 'r') as file:
@@ -118,7 +118,7 @@ def regression():
         # elif option == 'Banco':
         #     with open('markdowns/banco', 'r') as file:
         #         st.markdown(file.read())
-    with st.beta_expander('Ajustar modelo de regressão'):
+    with st.expander('Ajustar modelo de regressão'):
         st.markdown('### Configuração do treinamento')
         train_size = st.slider('Proporção do conjunto de treinamento', value=0.7, min_value=0.5, max_value=0.9, step=0.05)
         st.markdown('### Configuração do método de regressão')
@@ -180,7 +180,7 @@ def regression():
                 st.write('* Score (treinamento)= ', r2_score(y_train, model.predict(X_train)))
                 st.write('* Score (teste)= ', r2_score(y_test, model.predict(X_test)))
 
-    with st.beta_expander('Fazer previsão'):
+    with st.expander('Fazer previsão'):
         inputs = {}
         for column in df_temp.drop([output] + colunas_para_eliminar, axis=1).columns:
             if column in df_temp.drop([output] + colunas_para_eliminar, axis=1).select_dtypes(exclude='object').columns:
