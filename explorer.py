@@ -25,12 +25,12 @@ def explorer():
                 'Carros': {'data': 'CarPrice_Assignment', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
-    with st.beta_expander('Dados'):
+    with st.expander('Dados'):
         linhas = st.slider('Número de linhas para exibir', value=5, max_value=100, min_value=5)
         df_temp = fecth_data(exemplos[option]['data'], sep=exemplos[option]['sep'])
         st.dataframe(df_temp.head(linhas))
         st.write(f'Número total de linhas = {df_temp.shape[0]}')
-    with st.beta_expander('Descrição'):
+    with st.expander('Descrição'):
         if option == 'AirBnb Nova Iorque':
             with open('markdowns/airbnb_ny', 'r') as file:
                 st.markdown(file.read())
@@ -45,7 +45,7 @@ def explorer():
                 st.markdown(file.read())
             
 
-    with st.beta_expander('Filtros'):
+    with st.expander('Filtros'):
         filtro = st.empty()
         cols = st.beta_columns(2)
         st.subheader('Colunas categóricas')
@@ -85,7 +85,7 @@ def explorer():
         else:
             df = df_temp.copy()
 
-    with st.beta_expander('Estatísticas por coluna'):
+    with st.expander('Estatísticas por coluna'):
         todas_colunas = list(df.columns)
         target_column = st.selectbox('Escolha a coluna para cálculo da estatística', todas_colunas)
         if target_column in df.select_dtypes(exclude='object').columns:
@@ -96,8 +96,8 @@ def explorer():
                         'máximo', 
                         'estatísticas descritivas básicas']
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
-            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='por coluna')
-            if st.button('Calcular', key='por coluna'):
+            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='radio por coluna')
+            if st.button('Calcular', key=' button por coluna'):
                 estatisticas = {'média': df[target_column].mean(), 
                     'desvio padrão': df[target_column].std(), 
                     'mediana': df[target_column].median(), 
@@ -129,7 +129,7 @@ def explorer():
                 except:
                     st.write(df_e)
 
-    with st.beta_expander('Estatísticas agrupadas'):
+    with st.expander('Estatísticas agrupadas'):
         todas_colunas = list(df.columns)
         groupy_list = st.multiselect('Escolha as colunas de agrupamento', todas_colunas)
         # colunas_restantes = [value for value in todas_colunas if value not in groupy_list]
@@ -155,7 +155,7 @@ def explorer():
             df_e = estatisticas[statistics]
             st.dataframe(df_e.reset_index())
             
-    with st.beta_expander('Gráficos interativos'):
+    with st.expander('Gráficos interativos'):
         lista_graficos = ['dispersão','densidade', 'linha', 'area', 'histograma', 'box', 'violino', 'categoria paralela',
                         'dispersão geográfica', 'densidade geográfica']
         st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
