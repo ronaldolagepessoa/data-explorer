@@ -96,8 +96,8 @@ def explorer():
                         'máximo', 
                         'estatísticas descritivas básicas']
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
-            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='radio por coluna')
-            if st.button('Calcular', key=' button por coluna'):
+            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='radio por coluna 2')
+            if st.button('Calcular', key='button por coluna 2'):
                 estatisticas = {'média': df[target_column].mean(), 
                     'desvio padrão': df[target_column].std(), 
                     'mediana': df[target_column].median(), 
@@ -117,8 +117,8 @@ def explorer():
                         'freq valores únicos (normalizado)',
                         'estatísticas descritivas básicas']
             st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
-            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='por coluna')
-            if st.button('Calcular', key='por coluna'):
+            statistics = st.radio('Escolha a estatística', lista_estatisticas, key='radio por coluna 1')
+            if st.button('Calcular', key='button por coluna 1'):
                 estatisticas = {'valores únicos': df[target_column].unique(), 
                     'freq valores únicos': df[target_column].value_counts(), 
                     'freq valores únicos (normalizado)': df[target_column].value_counts(normalize=True), 
