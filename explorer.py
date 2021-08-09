@@ -57,18 +57,18 @@ def explorer():
                 freqs[column, 'mínimo'] = st.number_input(f"Frequência mínima", 
                                                     min_value=df_temp[column].value_counts().min(), 
                                                     max_value=df_temp[column].value_counts().max(),
-                                                    value=df_temp[column].value_counts().min(), key=column)
+                                                    value=df_temp[column].value_counts().min(), key=f'min_{column}')
                 freqs[column, 'máximo'] = st.number_input(f"Frequência máxima", 
                                                     min_value=df_temp[column].value_counts().min(), 
                                                     max_value=df_temp[column].value_counts().max(),
-                                                    value=df_temp[column].value_counts().max(), key=column)
+                                                    value=df_temp[column].value_counts().max(), key=f'max_{column}')
         with cols[1]:
             st.subheader('Colunas Numéricas')
             values = {}
             for column in df_temp.select_dtypes(exclude='object').columns:
                 st.write(column)
-                values[column, 'mínimo'] = st.number_input(f"Valor mínimo", value=df_temp[column].min(), key=column)
-                values[column, 'máximo'] = st.number_input(f"Valor máximo", value=df_temp[column].max(), key=column)
+                values[column, 'mínimo'] = st.number_input(f"Valor mínimo", value=df_temp[column].min(), key=f'min_{column}')
+                values[column, 'máximo'] = st.number_input(f"Valor máximo", value=df_temp[column].max(), key=f'max_{column}')
         if filtro.checkbox('Aplicar filtros'):
             df = df_temp.copy()
             for column in df_temp.select_dtypes(include='object').columns:

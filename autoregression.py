@@ -101,6 +101,7 @@ def autoregression():
                 'População': {'data': 'população', 'sep': ','},
                 'Temperatura em Fortaleza': {'data': 'temperatura_fortaleza', 'sep': ','},
                 'Temperatura na Índia': {'data': 'temperatura_india', 'sep': ','},
+                'Temperatura em Punjab': {'data': 'temperatura_punjab', 'sep': ','},
                 'Clima em Nova Deli': {'data': 'DailyDelhiClimateTrain', 'sep': ','}
                 }
     option = st.selectbox('Escolha o exemplo', [key for key in exemplos])
